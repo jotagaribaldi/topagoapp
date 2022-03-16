@@ -62,6 +62,9 @@ const styles = StyleSheet.create({
         maxHeight: 200,
         maxWidth: 300,
     },
+    link: {
+      color: '#051C63',
+    },
    
 })
 

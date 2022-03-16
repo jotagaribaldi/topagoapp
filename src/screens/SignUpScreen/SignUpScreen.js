@@ -2,6 +2,7 @@ import { View, Alert, Text, StyleSheet, ScrollView } from 'react-native'
 import React, {useState, useEffect} from 'react';
 import firebase from "../../config/firebase/firebaseconfig";
 import { useNavigation } from '@react-navigation/native';
+
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import CustomMaskInput from '../../components/CustomMaskInput';
@@ -9,7 +10,7 @@ import RadioButtons from '../../components/RadioButtons';
 //import SocialSignInButtons from '../../components/SocialSignInButtons/SocialSignInButtons';
 const SignUpScreen = () => {
 
-    const database = firebase.firestore()
+   
     
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -18,6 +19,10 @@ const SignUpScreen = () => {
     const [password, setPassword] = useState('');
     const [codigoPromo, setCodigoPromo] = useState('');
     const navigation = useNavigation();
+
+    const database = firebase.firestore()
+
+
     const [selected, setSelected] = useState(0);
 
     const [placeholderSelected, setPlaceholderSelected] = useState('CPF');
@@ -28,6 +33,10 @@ const SignUpScreen = () => {
 
     const [gruParceiroSelect, setGruParceiroSelect] = useState([])
     const [gruParceirofirestore, setgruParceirofirestore] = useState([])   
+
+
+    const [blogs,setBlogs]=useState([])
+
 
     const onRegisterPressed = () => {
       //console.warn('Register In');
@@ -46,24 +55,22 @@ const SignUpScreen = () => {
       Alert.alert("Por que pedir meu CPF/CNPJ?", "O CPF/CNPJ serve para sua segurança. É a partir dele que o lojista atribui o seu cashback na loja.");
     }
 
+ 
 
-  useEffect(()=> {
-  database.collection("grupoparceria").orderBy('codigo').onSnapshot((query) => {
+   useEffect(()=> {
+    database.collection("grupoparceria").orderBy('grupoparceria').onSnapshot((query) => {
       let daddos = [];
-      query.forEach((doc)=>{
-          
-         daddos.push({...doc.data(), id: doc.id})
-         const gruparc  = {
-             id: doc.id,
-             grupoparceiro: doc.data().grupoparceiro,
-         };
-       
-      })
-      setgruParceirofirestore(daddos);
-      console.log(daddos);
-})
-}, []); 
-
+        query.forEach((doc)=>{
+          daddos.push({...doc.data(), id: doc.id})
+          const grupoparceria  = {
+              codigo: doc.id,
+              grupoparceiro: doc.data().grupoparceiro,
+          };
+        }) 
+        setgruParceirofirestore(daddos);
+        })
+    }, []); 
+ 
     
 
   return (
@@ -95,6 +102,7 @@ const SignUpScreen = () => {
       <Text style={styles.text}>Já tem uma conta? <Text style={styles.link} onPress={onSignInPress}>Faça Login já!</Text></Text> 
     </View>
     </ScrollView>
+    
   )
 }
 
