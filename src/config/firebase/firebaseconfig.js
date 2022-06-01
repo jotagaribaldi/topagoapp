@@ -6,7 +6,7 @@ import 'firebase/compat/auth';
 const firebaseConfig = {
       apiKey: "AIzaSyBE3IbpsEVC5YIypN5W3DaSWO80x5sNMvc",
       authDomain: "topagoapp.firebaseapp.com",
-      databaseURL: "https://creatovantag-default-rtdb.firebaseio.com",
+     // databaseURL: "https://creatovantag-default-rtdb.firebaseio.com",
       projectId: "topagoapp",
       storageBucket: "topagoapp.appspot.com",
       messagingSenderId: "548820232443",
@@ -16,7 +16,7 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
 
-  firebase.firestore().settings({ experimentalForceLongPolling: true });
+  firebase.firestore().settings({ experimentalForceLongPolling: true,  merge:true });
 
   export default firebase;
 

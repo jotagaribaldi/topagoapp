@@ -17,6 +17,7 @@ const CustomMaskInput = ({ value, setValue, placeholder, type, secureTextEntry, 
                 placeholder={placeholder}
                 type={type}
                 onChangeText={setValue}
+                placeholderTextColor='black'
                 value={value}
                 keyboardType="numeric"
             />
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical: 5, 
     },
-    input: {},
+    input: { height: 40 },
 });
 export default CustomMaskInput
